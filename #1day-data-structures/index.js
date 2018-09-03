@@ -5,8 +5,10 @@ class Stack {
   }
 
   push(val) {
-    this.storage[this.count] = val
-    this.count++
+    if (val!==undefined){
+      this.storage[this.count] = val
+      this.count++
+    }
   }
 
   pop() {
