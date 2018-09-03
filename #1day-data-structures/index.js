@@ -59,7 +59,6 @@ class MinHeap {
   }
 
   remove() {
-    let min = this.heap[1]
     if (this.heap.length > 2) {
       this.heap[1] = this.heap[this.heap.length - 1]
       this.heap.length--
@@ -76,11 +75,8 @@ class MinHeap {
           break
       }
     } else if (this.heap.length == 2) {
-      this.heap.length=1
-    } else {
-      this.heap[0]
-    }
-    return min
+      this.heap.length = 1
+    } 
   }
 }
 
@@ -88,6 +84,43 @@ class MaxHeap {
   constructor() {
     this.heap = [null]
   }
+  insert(num) {
+    this.heap.push(num);
+    if (this.heap.length > 2) {
+      let index = this.heap.length - 1
+      while (this.heap[index] > this.heap[Math.floor(index / 2)]) {
+        if (index >= 1) {
+          [this.heap[Math.floor(index / 2)], this.heap[index]] = [this.heap[index], this.heap[Math.floor(index / 2)]]
+          if (Math.floor(index / 2) > 1) {
+            index = Math.floor(index / 2)
+          } else {
+            return
+          };
+        };
+      };
+    };
+  }
+
+  remove() {
+    if (this.heap.length > 2) {
+      this.heap[1] = this.heap[this.heap.length - 1]
+      this.heap.length--
+      let i = 1
+      while (this.heap[i] <= this.heap[2 * i] || this.heap[i] <= this.heap[2 * i + 1]) {
+        if (this.heap[2 * i] > this.heap[2 * i + 1]) {
+          [this.heap[i], this.heap[2 * i]] = [this.heap[2 * i], this.heap[i]]
+          i *= 2
+        } else {
+          [this.heap[i], this.heap[2 * i + 1]] = [this.heap[2 * i + 1], this.heap[i]]
+          i = 2 * i + 1
+        }
+        if (this.heap[2 * i] == undefined || this.heap[2 * i + 1] == undefined)
+          break
+      }
+    } else if (this.heap.length == 2) {
+      this.heap.length = 1
+    } 
+  }
 }
 
-module.exports = { Stack, MinHeap }
+module.exports = { Stack, MinHeap, MaxHeap }
