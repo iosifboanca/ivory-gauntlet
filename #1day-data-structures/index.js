@@ -37,7 +37,6 @@ class Stack {
 }
 
 class MinHeap {
-  //Playground for vizualization - https://www.cs.usfca.edu/~galles/visualization/Heap.html
   constructor() {
     this.heap = [null]
   }
