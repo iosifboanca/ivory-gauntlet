@@ -78,6 +78,7 @@ class MinHeap {
   }
 
   remove() {
+    let min = this.heap[1]
     if (this.heap.length > 2) {
       this.heap[1] = this.heap[this.heap.length - 1]
       this.heap.length--
@@ -96,7 +97,89 @@ class MinHeap {
     } else if (this.heap.length == 2) {
       this.heap.length = 1
     }
+    return min
   }
+
+  sort() {
+		let arr = []
+		while (this.heap.length > 1) {
+			arr.push(this.remove())
+		}
+		return arr
+	}
+}
+
+class MaxHeap {
+  constructor() {
+    this.heap = [null]
+  }
+
+  size() {
+    return this.heap.length - 1
+  }
+
+  isEmpty() {
+    if (this.size())
+      return false
+    else
+      return true
+  }
+
+  findMax() {
+    return this.heap[1]
+  }
+
+  heapify(...val) {
+    [...val].map(e => this.insert(e))
+  }
+
+  insert(num) {
+    this.heap.push(num);
+    if (this.heap.length > 2) {
+      let index = this.heap.length - 1
+      while (this.heap[index] > this.heap[Math.floor(index / 2)]) {
+        if (index >= 1) {
+          [this.heap[Math.floor(index / 2)], this.heap[index]] = [this.heap[index], this.heap[Math.floor(index / 2)]]
+          if (Math.floor(index / 2) > 1) {
+            index = Math.floor(index / 2)
+          } else {
+            return
+          };
+        };
+      };
+    };
+  }
+
+  remove() {
+    let max = heap[1]
+    if (this.heap.length > 2) {
+      this.heap[1] = this.heap[this.heap.length - 1]
+      this.heap.length--
+      let i = 1
+      while (this.heap[i] <= this.heap[2 * i] || this.heap[i] <= this.heap[2 * i + 1]) {
+        if (this.heap[2 * i] > this.heap[2 * i + 1]) {
+          [this.heap[i], this.heap[2 * i]] = [this.heap[2 * i], this.heap[i]]
+          i *= 2
+        } else {
+          [this.heap[i], this.heap[2 * i + 1]] = [this.heap[2 * i + 1], this.heap[i]]
+          i = 2 * i + 1
+        }
+        if (this.heap[2 * i] == undefined || this.heap[2 * i + 1] == undefined)
+          break
+      }
+    } else if (this.heap.length == 2) {
+      this.heap.length = 1
+    }
+  return max
+  }
+
+  sort() {
+		let arr = []
+		while (this.heap.length > 1) {
+			arr.push(this.remove())
+		}
+		return arr
+	}
 }
 
 module.exports = { Stack, MinHeap, MaxHeap }
