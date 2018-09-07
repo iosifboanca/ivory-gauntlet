@@ -3,6 +3,7 @@ import CONSTANTS from '../Constants/constants'
 let { DOLOGIN } = CONSTANTS
 
 let globalState = {
+  isLoggedIn: false,
   user: {},
 }
 

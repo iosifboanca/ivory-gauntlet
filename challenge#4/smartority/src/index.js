@@ -11,6 +11,8 @@ import App from './App'
 import reducer from './Reducer/reducer'
 import saga from './Saga/saga'
 
+
+
 localForage.config({
   driver: localForage.LOCALSTORAGE,
   name: 'Smartority',
