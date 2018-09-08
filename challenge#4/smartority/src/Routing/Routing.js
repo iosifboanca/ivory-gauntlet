@@ -7,7 +7,7 @@ import LoginPage from '../Pages/LoginPage'
 import HomePage from '../Pages/HomePage'
 
 class Routing extends Component {
-  routeToLogInPage = () => !this.props.isLoggedIn ? <LoginPage /> : <LoginPage />
+  routeToLogInPage = () => !this.props.isLoggedIn ? <LoginPage /> : <HomePage/>
 
   render() {
     return (

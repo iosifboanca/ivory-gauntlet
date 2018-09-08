@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Auth } from 'aws-amplify'
 
-import { userLogin } from '../Actions/actions'
+import { userLogin, cognitoUserToState } from '../Actions/actions'
 import RegisterComponent from '../Components/RegisterComponent'
 class LoginPage extends Component {
   constructor(props) {
@@ -13,15 +12,10 @@ class LoginPage extends Component {
       register: false
     }
   }
-  handleSubmit = async event => {
+  handleSubmit = event => {
     event.preventDefault()
-    try {
-      await Auth.signIn(this.state.username, this.state.password)
-        .then(user => console.log(user))
-        .catch(err => console.log(err))
-    } catch (error) {
-      console.log(error)
-    }
+    userLogin()
+
   }
   onChange = event => {
     this.setState({ [event.target.id]: event.target.value })
@@ -30,6 +24,7 @@ class LoginPage extends Component {
     this.setState({register: !this.state.register})
   }
   render() {
+    console.log(this.props.cognitoUser)
     return (
       <div className='form-style-6'>
         <h3>Login</h3>
@@ -45,8 +40,8 @@ class LoginPage extends Component {
   }
 }
 
-let mapDispatchToProps = { userLogin }
-let mapStateToProps = state => ({ isLoggedIn: state.isLoggedIn })
+let mapDispatchToProps = { userLogin, cognitoUserToState }
+let mapStateToProps = state => ({ cognitoUser: state.cognitoUser, isLoggedIn: state.isLoggedIn })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
 

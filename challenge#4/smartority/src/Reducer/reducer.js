@@ -1,10 +1,11 @@
 import CONSTANTS from '../Constants/constants'
 
-let { DOLOGIN } = CONSTANTS
+let { DOLOGIN, COGNITO_USER_TO_STATE } = CONSTANTS
 
 let globalState = {
   isLoggedIn: false,
   user: {},
+  cognitoUser : {}
 }
 
 const reducer = (state = globalState, action) =>{
@@ -13,6 +14,11 @@ const reducer = (state = globalState, action) =>{
       return {
         ...state,
         isLoggedIn: action.payload
+      }
+    case COGNITO_USER_TO_STATE:
+      return {
+        ...state,
+        cognitoUser: action.payload
       }
     default:
       return state
