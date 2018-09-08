@@ -9,7 +9,8 @@ class LoginPage extends Component {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      register: false
     }
   }
   handleSubmit = async event => {
@@ -25,16 +26,20 @@ class LoginPage extends Component {
   onChange = event => {
     this.setState({ [event.target.id]: event.target.value })
   }
+  makeRegisterAppear = () =>{
+    this.setState({register: !this.state.register})
+  }
   render() {
     return (
-      <div>
+      <div className='form-style-6'>
         <h3>Login</h3>
         <form onSubmit={this.handleSubmit}>
           <input autoFocus type="text" id="username" placeholder="E-mail Address" value={this.state.username} onChange={this.onChange} />
           <input autoFocus type="password" id="password" placeholder="Password" value={this.state.password} onChange={this.onChange} />
           <input type="submit" value="Submit" />
         </form>
-        <RegisterComponent/>
+        <button onClick={this.makeRegisterAppear}> Register</button>
+        {this.state.register ? <RegisterComponent/> : <div/>}
       </div>
     )
   }
