@@ -1,3 +1,17 @@
+.bodyNotes{
+  text-align:center;
+}
+.div{
+  display:block;
+}
+
+.todo-wrapper{
+  margin: 20px auto 20 px auto;
+  width: 600px;
+  min-height: 700 px;
+  padding: 20px;
+}
+
 .form-style-6{
   font: 95% Arial, Helvetica, sans-serif;
   max-width: 400px;
@@ -15,7 +29,8 @@
   margin: -16px -16px 16px -16px;
 }
 .form-style-6 input[type="text"],
-.form-style-6 input[type="email"],
+.form-style-6 input[type="password"],
+
 .form-style-6 select 
 {
   -webkit-transition: all 0.30s ease-in-out;
@@ -44,6 +59,7 @@
 }
 
 .form-style-6 input[type="submit"]{
+  margin: 2em;
   border-top: 10px;
 }
 .form-style-6 input[type="submit"]:hover,

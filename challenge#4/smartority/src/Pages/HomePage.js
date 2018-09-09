@@ -2,12 +2,15 @@ import React,{Component} from 'react'
 import { connect } from 'react-redux'
 
 import HeaderBar from '../Components/HeaderBarComponent'
+import BodyNotesPage from '../Pages/BodyNotesPage'
 class HomePage extends Component{
   render(){
     return(
       <div>
         <HeaderBar/>
-        <h1>Hello {this.props.cognitoUser ? this.props.cognitoUser.username : 'ceva'}!</h1>
+        <div style={{display :'flex', justifyContent:'center'}}>
+        <BodyNotesPage/>
+        </div>
       </div>
     )
   }

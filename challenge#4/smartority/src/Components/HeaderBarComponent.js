@@ -9,17 +9,15 @@ class HeaderComponent extends Component {
     return (
       <div>
         <Navbar>
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a href='/'>Home</a>
-              </Navbar.Brand>
-            </Navbar.Header>
+          <Navbar.Brand>
+            Welcome {this.props.cognitoUser ? this.props.cognitoUser.username : ''}
+            </Navbar.Brand>
               <Nav pullRight>
-                <NavDropdown eventKey={3} title="User" id="basic-nav-dropdown">
-                  <MenuItem eventKey={3.1}>Notes</MenuItem>
-                  <MenuItem eventKey={3.2}>Another action</MenuItem>
+                <NavDropdown title="User" id="basic-nav-dropdown">
+                  <MenuItem>Notes</MenuItem>
+                  <MenuItem >Another action</MenuItem>
                   <MenuItem divider />
-                  <MenuItem eventKey={3.3} onClick={this.props.doLogOut}>Log out</MenuItem>
+                  <MenuItem onClick={this.props.doLogOut}>Log out</MenuItem>
                 </NavDropdown>
               </Nav>
         </Navbar>
@@ -27,8 +25,8 @@ class HeaderComponent extends Component {
     )
   }
 }
-
+let mapStateToProps = state => ({cognitoUser: state.cognitoUser})
 let mapDispatchToProps = {doLogOut}
 
-export default connect(null, mapDispatchToProps)(HeaderComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderComponent)
 
