@@ -24,7 +24,6 @@ class LoginPage extends Component {
     this.setState({register: !this.state.register})
   }
   render() {
-    console.log(this.props.cognitoUser)
     return (
       <div className='form-style-6'>
         <h3>Login</h3>

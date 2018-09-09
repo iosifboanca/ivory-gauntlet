@@ -1,14 +1,14 @@
-import { call, put } from 'redux-saga/effects'
+import { put, all } from 'redux-saga/effects'
 import { cognitoUserToState } from '../Actions/actions'
 import { Auth } from 'aws-amplify'
 
 
 function* loginSaga() {
   try {
+    console.log('ajunge aici')
     let cognitoUser = Auth.signIn(this.state.username, this.state.password)
-      .then(user => { console.log(user); return user })
+      .then(user => { return user })
       .catch(err => console.log(err))
-    console.log(cognitoUser)
     yield put(cognitoUserToState(cognitoUser.value))
   } catch (error) {
     console.log(error)
@@ -16,5 +16,5 @@ function* loginSaga() {
 }
 
 export default function* saga() {
-  yield call(loginSaga)
+  yield all([loginSaga])
 }
