@@ -1,24 +1,27 @@
 import { put, all, takeLatest, select } from 'redux-saga/effects'
-import { cognitoUserToState } from '../Actions/actions'
 import { Auth } from 'aws-amplify'
 
+import { cognitoUserToState, userLogin } from '../Actions/actions'
 import CONSTANTS from '../Constants/constants'
 
-const {DOLOGIN} = CONSTANTS
+const { PUTUSERTOSTATE } = CONSTANTS
 
 function* loginSaga() {
   try {
-    let cognitoUser = yield Auth.signIn(yield select((state)=> state.user), yield select((state)=> state.password))
-      .then(user => user )
-      .catch(err => console.log(err))
-    yield put(cognitoUserToState(cognitoUser))
+    let cognitoUser = yield Auth.signIn(yield select((state) => state.user), yield select((state) => state.password))
+      .then(user => user)
+      .catch(err => err)
+    if (cognitoUser.username) {
+      yield put(userLogin())
+      yield put(cognitoUserToState(cognitoUser))
+    } 
   } catch (error) {
-    console.log(error)
+    alert(error.message)
   }
 }
 
 export default function* saga() {
   yield all([
-    yield takeLatest(DOLOGIN,loginSaga)
+    yield takeLatest(PUTUSERTOSTATE, loginSaga)
   ])
 }

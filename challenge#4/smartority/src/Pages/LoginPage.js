@@ -15,7 +15,6 @@ class LoginPage extends Component {
   handleSubmit = event => {
     event.preventDefault()
     this.props.putUserToState([this.state.username,this.state.password])
-    this.props.userLogin()
 
   }
   onChange = event => {
@@ -25,7 +24,6 @@ class LoginPage extends Component {
     this.setState({register: !this.state.register})
   }
   render() {
-    console.log(this.props.isLoggedIn)
     return (
       <div className='form-style-6'>
         <h3>Login</h3>
