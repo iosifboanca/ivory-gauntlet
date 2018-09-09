@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { userLogin, cognitoUserToState } from '../Actions/actions'
+import { userLogin, cognitoUserToState, putUserToState } from '../Actions/actions'
 import RegisterComponent from '../Components/RegisterComponent'
 class LoginPage extends Component {
   constructor(props) {
@@ -14,7 +14,8 @@ class LoginPage extends Component {
   }
   handleSubmit = event => {
     event.preventDefault()
-    userLogin()
+    this.props.putUserToState([this.state.username,this.state.password])
+    this.props.userLogin()
 
   }
   onChange = event => {
@@ -24,6 +25,7 @@ class LoginPage extends Component {
     this.setState({register: !this.state.register})
   }
   render() {
+    console.log(this.props.isLoggedIn)
     return (
       <div className='form-style-6'>
         <h3>Login</h3>
@@ -39,7 +41,7 @@ class LoginPage extends Component {
   }
 }
 
-let mapDispatchToProps = { userLogin, cognitoUserToState }
+let mapDispatchToProps = { userLogin, cognitoUserToState, putUserToState }
 let mapStateToProps = state => ({ cognitoUser: state.cognitoUser, isLoggedIn: state.isLoggedIn })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
