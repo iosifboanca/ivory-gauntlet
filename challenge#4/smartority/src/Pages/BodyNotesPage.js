@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import '../index.css'
 import Header from '../Components/BodyComponents/header'
 import TodoInput from '../Components/BodyComponents/todoInput'
 import TodoItem from '../Components/BodyComponents/todoItem'
+import { putNotesToState } from '../Actions/actions'
 
 class BodyNotesPage extends Component {
   constructor(props) {
@@ -34,7 +36,10 @@ class BodyNotesPage extends Component {
         todos: this.state.todos.filter((todo, index) => todo.id !== id)
       });
   }
-
+  saveOnClick(){
+    console.log('salvam',this.state.todos)
+    this.props.putNotesToState(this.state.todos)
+  }
   render() {
     return (
       <div className="bodyNotes">
@@ -43,15 +48,19 @@ class BodyNotesPage extends Component {
           <TodoInput todoText="" addTodo={this.addTodo} />
           <ul>
             {
-              this.state.todos.map((todo) => {
+              this.props.userNotes.map((todo) => {
                 return <TodoItem todo={todo} key={todo.id} id={todo.id} removeTodo={this.removeTodo}/>
               })
             }
           </ul>
+          <button onClick={this.saveOnClick()}>Save</button>
         </div>
       </div>
     );
   }
 }
 
-export default BodyNotesPage;
+let mapStateToProps = state => ({userNotes:state.userNotes})
+let mapDispatchToProps = {putNotesToState}
+
+export default connect(mapStateToProps,mapDispatchToProps)(BodyNotesPage)

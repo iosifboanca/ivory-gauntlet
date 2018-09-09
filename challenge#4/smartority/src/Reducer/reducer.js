@@ -1,12 +1,13 @@
 import CONSTANTS from '../Constants/constants'
 
-let { DOLOGIN, COGNITO_USER_TO_STATE, PUTUSERTOSTATE, LOGOUT } = CONSTANTS
+let { PUSHNOTESTOSTATE, DOLOGIN, COGNITO_USER_TO_STATE, PUTUSERTOSTATE, LOGOUT } = CONSTANTS
 
 let globalState = {
   isLoggedIn: false,
   user: {},
   password: {},
-  cognitoUser : {}
+  cognitoUser : {},
+  userNotes: []
 }
 
 const reducer = (state = globalState, action) =>{
@@ -32,6 +33,11 @@ const reducer = (state = globalState, action) =>{
         ...state,
         user: action.payload[0],
         password: action.payload[1]
+      }
+    case PUSHNOTESTOSTATE:
+      return {
+        ...state,
+        userNotes: action.payload
       }
     default:
       return state
