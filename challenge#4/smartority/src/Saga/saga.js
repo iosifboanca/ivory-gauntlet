@@ -9,9 +9,9 @@ const {DOLOGIN} = CONSTANTS
 function* loginSaga() {
   try {
     let cognitoUser = yield Auth.signIn(yield select((state)=> state.user), yield select((state)=> state.password))
-      .then(user => { console.log(user); return user })
+      .then(user => user )
       .catch(err => console.log(err))
-    yield put(cognitoUserToState(cognitoUser.value))
+    yield put(cognitoUserToState(cognitoUser))
   } catch (error) {
     console.log(error)
   }
