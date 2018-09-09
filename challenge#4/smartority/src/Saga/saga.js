@@ -1,7 +1,10 @@
-import { put, all } from 'redux-saga/effects'
+import { put, all, takeLatest } from 'redux-saga/effects'
 import { cognitoUserToState } from '../Actions/actions'
 import { Auth } from 'aws-amplify'
 
+import CONSTANTS from '../Constants/constants'
+
+const {DOLOGIN} = CONSTANTS
 
 function* loginSaga() {
   try {
@@ -16,5 +19,7 @@ function* loginSaga() {
 }
 
 export default function* saga() {
-  yield all([loginSaga])
+  yield all([
+    yield takeLatest(DOLOGIN,loginSaga)
+  ])
 }
