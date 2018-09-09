@@ -1,6 +1,6 @@
 import CONSTANTS from '../Constants/constants'
 
-let { DOLOGIN, COGNITO_USER_TO_STATE, PUTUSERTOSTATE } = CONSTANTS
+let { DOLOGIN, COGNITO_USER_TO_STATE, PUTUSERTOSTATE, LOGOUT} = CONSTANTS
 
 export const userLogin = () => ({
   type: DOLOGIN,
@@ -15,4 +15,9 @@ export const cognitoUserToState = (user) =>({
 export const putUserToState = (userData) => ({
   type: PUTUSERTOSTATE,
   payload: userData
+})
+
+export const doLogOut = () =>({
+  type: LOGOUT,
+  payload: false
 })

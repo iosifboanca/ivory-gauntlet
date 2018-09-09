@@ -1,11 +1,13 @@
 import React,{Component} from 'react'
 import { connect } from 'react-redux'
 
+import HeaderBar from '../Components/HeaderBarComponent'
 class HomePage extends Component{
   render(){
     return(
       <div>
-        <h1>Hello {this.props.cognitoUser.username}!</h1>
+        <HeaderBar/>
+        <h1>Hello {this.props.cognitoUser ? this.props.cognitoUser.username : 'ceva'}!</h1>
       </div>
     )
   }

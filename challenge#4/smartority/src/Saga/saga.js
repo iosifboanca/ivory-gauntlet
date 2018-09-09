@@ -4,7 +4,7 @@ import { Auth } from 'aws-amplify'
 import { cognitoUserToState, userLogin } from '../Actions/actions'
 import CONSTANTS from '../Constants/constants'
 
-const { PUTUSERTOSTATE } = CONSTANTS
+const { PUTUSERTOSTATE, LOGOUT } = CONSTANTS
 
 function* loginSaga() {
   try {
@@ -20,8 +20,18 @@ function* loginSaga() {
   }
 }
 
+function* logOutSaga(){
+  try{
+    yield Auth.signOut()
+    .then(data=>console.log(data))
+    .catch(err=>console.log(err))
+  } catch (err){
+    console.log(err)
+  }
+}
 export default function* saga() {
   yield all([
-    yield takeLatest(PUTUSERTOSTATE, loginSaga)
+    yield takeLatest(PUTUSERTOSTATE, loginSaga),
+    yield takeLatest(LOGOUT, logOutSaga)
   ])
 }
